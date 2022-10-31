@@ -1,0 +1,8 @@
+@import '~styles';
+
+.page-content-wrapper {
+    padding-left: $layout-left-padding;
+    padding-right: $layout-right-padding;
+    width: 100%;
+    box-sizing: border-box;
+}

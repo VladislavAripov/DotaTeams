@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react';
 import './Page.scss';
 
-export const Page: React.FC<React.PropsWithChildren> = (props) => {
+export interface IPageProps {
+}
+
+export const Page: React.FC<React.PropsWithChildren<IPageProps>> = (props) => {
     return (
         <div className={'page'}>
             <div className={'header'}>

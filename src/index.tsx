@@ -1,23 +1,26 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import './index.scss';
+import './App/init/initAxios';
+import './App/init/initDateTime';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { Router } from 'react-router';
+import App from 'App';
+import browserHistory from 'App/root/browserHistory';
+import ErrorBoundary from 'components/ErrorBoundary';
+import { initApp } from 'features/app/actionCreators';
+import { store } from 'App/root/store';
 
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+document.body.classList.add('theme__default');
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+ReactDOM.render(
+    <ErrorBoundary>
+        <Provider store={store}>
+            <Router history={browserHistory}>
+                <App />
+            </Router>
+        </Provider>
+    </ErrorBoundary>,
+    document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+store.dispatch(initApp());
