@@ -6,17 +6,49 @@ $footer-height: 200px;
 .page {
     position: relative;
     min-height: 100vh;
+    background: $color-background;
 
     .header {
+        z-index: 100;
+        display: flex;
+        flex-direction: row;
         width: 100%;
         position: fixed;
         color: $color-control;
         top: 0;
         height: $header-height;
-        background: black;
+        background: rgba($color-black, 0.7);
         padding-left: $layout-left-padding;
         padding-right: $layout-right-padding;
         box-sizing: border-box;
+
+        .header-control {
+            height: $header-height;
+            line-height: $header-height;
+            text-align: center;
+        }
+        .header-control:hover {
+            color: $color-control-selected;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-size: 48px;
+        }
+
+        .nav-bar {
+            margin-left: auto;
+            display: flex;
+            flex-direction: row;
+
+            .nav-item {
+                margin: 0 10px;
+                height: 100%;
+                vertical-align: center;
+                font-size: 24px;
+            }
+        }
     }
 
     .body {
@@ -30,12 +62,68 @@ $footer-height: 200px;
     .footer {
         position: absolute;
         bottom: 0;
-        width: 100%;
         height: $footer-height;
-        background: black;
-        color: $color-control;
-        padding-left: $layout-left-padding;
-        padding-right: $layout-right-padding;
-        box-sizing: border-box;
+        width: 100%;
+
+        .footer-gradient {
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(180deg, rgba($color-black, 0), $color-black 100%);
+        }
+
+        .footer-info {
+            display: flex;
+            flex-direction: row;
+            color: $color-control;
+            padding-left: $layout-left-padding;
+            padding-right: $layout-right-padding;
+            width: 100%;
+            height: 70%;
+            background: $color-black;
+            padding-bottom: 32px;
+            box-sizing: border-box;
+
+            .left-panel {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+
+                .command-info {
+                    margin-top: auto;
+
+                    .title {
+                        font-size: 24px;
+                        margin-bottom: 9px;
+                    }
+
+                    .member-info {
+                        font-size: 16px;
+                    }
+                    .member-info:not(:last-child) {
+                        margin-bottom: 7px;
+                    }
+                }
+            }
+
+            .right-panel {
+                margin-left: auto;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                text-align: end;
+
+                .funding-info {
+                    margin-top: auto;
+                    font-size: 24px;
+                    margin-bottom: 9px;
+                }
+
+                .feedback {
+                    font-size: 16px;
+                }
+            }
+        }
     }
 }

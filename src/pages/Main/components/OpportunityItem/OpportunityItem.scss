@@ -1,0 +1,25 @@
+@import '~styles';
+
+.opportunity-item {
+    flex: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 296px;
+    width: 296px;
+
+    .opportunity-icon {
+        height: 184px;
+        width: 184px;
+        display: flex;
+        align-items: center;
+    }
+
+    .opportunity-label {
+        box-sizing: border-box;
+        padding-top: 16px;
+        height: 112px;
+        text-align: center;
+        font-size: 24px;
+    }
+}
