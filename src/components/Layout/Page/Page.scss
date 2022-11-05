@@ -23,19 +23,6 @@ $footer-height: 200px;
         padding-right: $layout-right-padding;
         box-sizing: border-box;
 
-        .header-control {
-            height: $header-height;
-            line-height: $header-height;
-            text-align: center;
-            user-select: none;
-        }
-
-        .header-control:hover {
-            color: $color-control-selected;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
         .logo {
             font-size: 48px;
         }
@@ -47,9 +34,11 @@ $footer-height: 200px;
 
             .nav-item {
                 margin: 0 25px;
-                height: 100%;
                 vertical-align: center;
                 font-size: 24px;
+                height: $header-height;
+                line-height: $header-height;
+                text-align: center;
             }
 
             .divider {

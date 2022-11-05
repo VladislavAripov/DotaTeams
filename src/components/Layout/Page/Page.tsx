@@ -2,6 +2,7 @@ import React from 'react';
 import './Page.scss';
 import browserHistory from 'App/root/browserHistory';
 import { Pages } from 'constants/links';
+import TextButton from 'ui-kit/TextButton';
 
 export interface IProps {
     solidBackground?: boolean;
@@ -11,38 +12,38 @@ export const Page: React.FC<React.PropsWithChildren<IProps>> = (props) => {
     return (
         <div className={`page ${props.solidBackground ? 'solid-background' : ''}`}>
             <div className={'header'}>
-                <div
-                    className={'header-control logo'}
+                <TextButton
+                    className={'logo'}
                     onClick={() => browserHistory.push(Pages.Main.url)}
                 >
                     DotaTeams
-                </div>
+                </TextButton>
                 <div className={'nav-bar'}>
-                    <div
-                        className={'header-control nav-item'}
+                    <TextButton
+                        className={'nav-item'}
                         onClick={() => browserHistory.push(Pages.Commands.url)}
                     >
                         Команды
-                    </div>
-                    <div
-                        className={'header-control nav-item'}
+                    </TextButton>
+                    <TextButton
+                        className={'nav-item'}
                         onClick={() => browserHistory.push(Pages.Players.url)}
                     >
                         Игроки
-                    </div>
-                    <div
-                        className={'header-control nav-item'}
+                    </TextButton>
+                    <TextButton
+                        className={'nav-item'}
                         onClick={() => browserHistory.push(Pages.Tournaments.url)}
                     >
                         Турниры
-                    </div>
+                    </TextButton>
                     <div className={'divider'} />
-                    <div
-                        className={'header-control nav-item'}
+                    <TextButton
+                        className={'nav-item'}
                         onClick={() => browserHistory.push(Pages.Authorization.url)}
                     >
                         ВОЙТИ
-                    </div>
+                    </TextButton>
                 </div>
             </div>
             <div className={'body'}>
