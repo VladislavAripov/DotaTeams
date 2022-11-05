@@ -1,12 +1,12 @@
 import React from 'react';
-import { Page } from 'Layout/Page/Page';
-import { PageContent } from 'Layout/PageContent/PageContent';
+import { Page } from 'components/Layout/Page/Page';
+import { PageContent } from 'components/Layout/PageContent/PageContent';
 import './MainPage.scss';
 import OpportunitiesPanel from './components/OpportunitiesPanel';
 
 const MainPage: React.FC = () => {
     return (
-        <Page>
+        <Page solidBackground>
             <div className={'MainPage'}>
                 <div className={'jugger'}>
                     <div className={'jugger-gradient'} />

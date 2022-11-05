@@ -12,7 +12,7 @@ import { LOGIN, LOGOUT, RELOGIN } from './actionTypes';
 
 type ILoginAction = ReturnType<typeof actionCreators.login>;
 
-export const goToLoginPage = () => (window.location.href = Pages.RegistrationLink.url);
+export const goToLoginPage = () => (window.location.href = Pages.Authorization.url);
 
 export function* initApp() {
     const token = (yield call([jwt, 'get'])) as string | null;

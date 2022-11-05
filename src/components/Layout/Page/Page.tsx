@@ -1,27 +1,46 @@
 import React from 'react';
 import './Page.scss';
+import browserHistory from 'App/root/browserHistory';
+import { Pages } from 'constants/links';
 
-export interface IPageProps {
+export interface IProps {
+    solidBackground?: boolean;
 }
 
-export const Page: React.FC<React.PropsWithChildren<IPageProps>> = (props) => {
+export const Page: React.FC<React.PropsWithChildren<IProps>> = (props) => {
     return (
-        <div className={'page'}>
+        <div className={`page ${props.solidBackground ? 'solid-background' : ''}`}>
             <div className={'header'}>
-                <div className={'header-control logo'}>
+                <div
+                    className={'header-control logo'}
+                    onClick={() => browserHistory.push(Pages.Main.url)}
+                >
                     DotaTeams
                 </div>
                 <div className={'nav-bar'}>
-                    <div className={'header-control nav-item'}>
+                    <div
+                        className={'header-control nav-item'}
+                        onClick={() => browserHistory.push(Pages.Commands.url)}
+                    >
                         Команды
                     </div>
-                    <div className={'header-control nav-item'}>
+                    <div
+                        className={'header-control nav-item'}
+                        onClick={() => browserHistory.push(Pages.Players.url)}
+                    >
                         Игроки
                     </div>
-                    <div className={'header-control nav-item'}>
+                    <div
+                        className={'header-control nav-item'}
+                        onClick={() => browserHistory.push(Pages.Tournaments.url)}
+                    >
                         Турниры
                     </div>
-                    <div className={'header-control nav-item'}>
+                    <div className={'divider'} />
+                    <div
+                        className={'header-control nav-item'}
+                        onClick={() => browserHistory.push(Pages.Authorization.url)}
+                    >
                         ВОЙТИ
                     </div>
                 </div>

@@ -6,7 +6,8 @@ $footer-height: 200px;
 .page {
     position: relative;
     min-height: 100vh;
-    background: $color-background;
+    background: url('./assets/jugger-background.png');
+    background-size: cover;
 
     .header {
         z-index: 100;
@@ -26,7 +27,9 @@ $footer-height: 200px;
             height: $header-height;
             line-height: $header-height;
             text-align: center;
+            user-select: none;
         }
+
         .header-control:hover {
             color: $color-control-selected;
             text-decoration: underline;
@@ -43,10 +46,17 @@ $footer-height: 200px;
             flex-direction: row;
 
             .nav-item {
-                margin: 0 10px;
+                margin: 0 25px;
                 height: 100%;
                 vertical-align: center;
                 font-size: 24px;
+            }
+
+            .divider {
+                height: 50%;
+                margin: auto 0;
+                width: 1px;
+                background: $color-control;
             }
         }
     }
@@ -100,6 +110,7 @@ $footer-height: 200px;
                     .member-info {
                         font-size: 16px;
                     }
+
                     .member-info:not(:last-child) {
                         margin-bottom: 7px;
                     }
@@ -126,4 +137,8 @@ $footer-height: 200px;
             }
         }
     }
+}
+
+.solid-background {
+    background: $color-background !important;
 }

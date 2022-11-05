@@ -2,14 +2,14 @@ import React from 'react';
 import { Page } from 'components/Layout/Page';
 import { PageContent } from 'components/Layout/PageContent';
 
-const CommandsPage: React.FC = () => {
+const PlayerProfilePage: React.FC = () => {
     return (
         <Page>
             <PageContent>
-                Страница со списком команд
+                Страница профиля игрока
             </PageContent>
         </Page>
     );
 };
 
-export default CommandsPage;
+export default PlayerProfilePage;
