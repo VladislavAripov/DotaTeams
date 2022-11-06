@@ -1,8 +1,10 @@
 @import '~styles';
 
 .page-content-wrapper {
-    padding-left: $layout-left-padding;
-    padding-right: $layout-right-padding;
     width: 100%;
+    padding: 50px $layout-right-padding 80px $layout-left-padding;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

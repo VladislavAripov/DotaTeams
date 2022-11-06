@@ -1,0 +1,32 @@
+@import '~styles';
+
+.AuthorizationPage {
+    .logo {
+        font-size: 64px;
+        color: $color-iron-man;
+        cursor: pointer;
+        user-select: none;
+        text-align: center;
+    }
+
+    .authorization-mode-selector {
+        font-size: 32px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        .authorization-mode-divider {
+            color: $color-control-selected;
+        }
+    }
+
+    .authorization-form-wrapper {
+        margin-top: 25px;
+        width: 400px;
+    }
+
+    .native-oauth-authorization-divider {
+        color: $color-control-selected !important;
+        border-top-color: $color-control !important;
+    }
+}
