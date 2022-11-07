@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import './TextButton.scss';
+import './TextButton.less';
 
 export interface IProps extends HTMLAttributes<HTMLDivElement> {
     active?: boolean;

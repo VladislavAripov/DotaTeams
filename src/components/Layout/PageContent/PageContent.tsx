@@ -1,5 +1,5 @@
 import React from 'react';
-import './PageContent.scss';
+import './PageContent.less';
 
 export interface IPageContentProps {
 }

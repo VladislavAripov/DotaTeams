@@ -1,4 +1,4 @@
-import './OpportunityItem.scss';
+import './OpportunityItem.less';
 import React from 'react';
 
 export interface IProps {

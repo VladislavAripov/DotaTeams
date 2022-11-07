@@ -10,8 +10,7 @@ import TournamentsPage from 'pages/Tournaments';
 import ProfilePage from 'pages/Profile';
 import MainPage from 'pages/Main';
 import { Pages } from 'constants/links';
-import 'antd/dist/antd.css';
-import './App.scss';
+import './App.less';
 
 const App: React.FC = () => {
     return (

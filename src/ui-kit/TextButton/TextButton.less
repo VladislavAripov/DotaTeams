@@ -1,21 +1,21 @@
-@import '~styles';
+@import 'styles';
 
 .text-button {
     user-select: none;
 
     .text {
-        color: $color-control;
+        color: @color-control;
         user-select: none;
         cursor: pointer;
     }
 
     .text:hover {
-        color: $color-control-selected;
+        color: @color-control-selected;
         text-decoration: underline;
     }
 
     .text.text-active {
-        color: $color-control-selected;
+        color: @color-control-selected;
         text-decoration: underline;
     }
 }

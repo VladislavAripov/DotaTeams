@@ -1,5 +1,5 @@
 import React from 'react';
-import './OAuthButton.scss';
+import './OAuthButton.less';
 
 const OAuthButton: React.FC = () => {
     return (

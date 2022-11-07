@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import './ContentWrapper.scss';
+import './ContentWrapper.less';
 
 export type WidthMode = 'FitContent' | 'FillParent';
 

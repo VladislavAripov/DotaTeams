@@ -4,7 +4,7 @@ import {
     Input,
     Button,
 } from 'antd';
-import './LoginForm.scss';
+import './LoginForm.less';
 
 interface ILogInFormValues {
     login: string;
@@ -30,7 +30,7 @@ const LogInForm: React.FC = () => {
                     <Input type={'password'} placeholder={'Пароль'} />
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType={'submit'} className={'login-button'}>Войти</Button>
+                    <Button htmlType={'submit'}>Войти</Button>
                 </Form.Item>
             </Form>
         </div>

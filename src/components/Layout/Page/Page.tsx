@@ -1,5 +1,5 @@
 import React from 'react';
-import './Page.scss';
+import './Page.less';
 import browserHistory from 'App/root/browserHistory';
 import { Pages } from 'constants/links';
 import TextButton from 'ui-kit/TextButton';

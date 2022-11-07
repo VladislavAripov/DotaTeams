@@ -9,7 +9,7 @@ import { Pages } from 'constants/links';
 import OAuthButton from './OAuthButton';
 import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
-import './AuthorizationPage.scss';
+import './AuthorizationPage.less';
 
 type AuthorizationMode = 'LogIn' | 'SignUp';
 

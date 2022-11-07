@@ -1,6 +1,6 @@
 import React from 'react';
 import OpportunityItem from '../OpportunityItem';
-import './OpportunitiesPanel.scss';
+import './OpportunitiesPanel.less';
 import communicate from './assets/communicate.svg';
 import training from './assets/training.svg';
 import statistics from './assets/statistics.svg';

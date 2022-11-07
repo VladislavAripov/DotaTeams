@@ -4,10 +4,10 @@ import {
     Input,
     Button,
 } from 'antd';
-import './SignUpForm.scss';
+import './SignUpForm.less';
 
 interface ISignUpFormValues {
-    login: string;
+    email: string;
     password: string;
 }
 
@@ -33,7 +33,7 @@ const SignUpForm: React.FC = () => {
                     <Input type={'password'} placeholder={'Пароль'} />
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType={'submit'} className={'login-button'}>Создать</Button>
+                    <Button htmlType={'submit'}>Создать</Button>
                 </Form.Item>
             </Form>
         </div>

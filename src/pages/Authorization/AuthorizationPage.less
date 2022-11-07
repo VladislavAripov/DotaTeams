@@ -1,9 +1,9 @@
-@import '~styles';
+@import 'styles';
 
 .AuthorizationPage {
     .logo {
         font-size: 64px;
-        color: $color-iron-man;
+        color: @color-iron-man;
         cursor: pointer;
         user-select: none;
         text-align: center;
@@ -16,7 +16,7 @@
         justify-content: center;
 
         .authorization-mode-divider {
-            color: $color-control-selected;
+            color: @color-control-selected;
         }
     }
 
@@ -26,7 +26,7 @@
     }
 
     .native-oauth-authorization-divider {
-        color: $color-control-selected !important;
-        border-top-color: $color-control !important;
+        color: @color-control-selected !important;
+        border-top-color: @color-control !important;
     }
 }

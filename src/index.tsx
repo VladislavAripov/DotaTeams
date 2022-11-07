@@ -1,4 +1,4 @@
-import './index.scss';
+import './index.less';
 import './App/init/initAxios';
 import './App/init/initDateTime';
 import ReactDOM from 'react-dom';

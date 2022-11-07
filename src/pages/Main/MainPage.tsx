@@ -1,7 +1,7 @@
 import React from 'react';
 import { Page } from 'components/Layout/Page/Page';
 import { PageContent } from 'components/Layout/PageContent/PageContent';
-import './MainPage.scss';
+import './MainPage.less';
 import OpportunitiesPanel from './components/OpportunitiesPanel';
 
 const MainPage: React.FC = () => {
