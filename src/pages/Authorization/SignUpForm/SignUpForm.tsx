@@ -5,6 +5,12 @@ import {
     Button,
 } from 'antd';
 import './SignUpForm.less';
+import {
+    emailOptionalField,
+    emailRequiredFiled,
+    requiredField,
+    setPasswordField,
+} from 'utils/antdValidationRules';
 
 interface ISignUpFormValues {
     email: string;
@@ -20,19 +26,44 @@ const SignUpForm: React.FC = () => {
     return (
         <div className={'SignUpForm'}>
             <Form<ISignUpFormValues>
-                layout={'horizontal'}
+                className={'signup-form'}
                 onFinish={onFinish}
             >
-                <Form.Item valuePropName={'login'}>
-                    <Input placeholder={'Логин'} />
+                <Form.Item
+                    name={'email'}
+                    rules={[
+                        ...emailRequiredFiled(true),
+                        ...emailOptionalField,
+                    ]}
+                >
+                    <Input className={'input'} placeholder={'Электронная почта'} />
                 </Form.Item>
-                <Form.Item valuePropName={'password'}>
-                    <Input type={'password'} placeholder={'Пароль'} />
+                <Form.Item
+                    name={'password'}
+                    rules={setPasswordField}
+                >
+                    <Input className={'input'} type={'password'} placeholder={'Придумайте пароль'} />
                 </Form.Item>
-                <Form.Item valuePropName={'password'}>
-                    <Input type={'password'} placeholder={'Пароль'} />
+                <Form.Item
+                    name={'confirm-password'}
+                    dependencies={['password']}
+                    rules={[
+                        requiredField,
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+
+                                return Promise.reject(new Error('Введенные пароли не совпадают'));
+                            },
+                        }),
+                    ]}
+                    status={''}
+                >
+                    <Input className={'input'} type={'password'} placeholder={'Повторите пароль'} />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item className={'submit-button'}>
                     <Button htmlType={'submit'}>Создать</Button>
                 </Form.Item>
             </Form>

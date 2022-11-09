@@ -5,6 +5,10 @@ import {
     Button,
 } from 'antd';
 import './LoginForm.less';
+import {
+    confirmPasswordField,
+    emailRequiredFiled,
+} from 'utils/antdValidationRules';
 
 interface ILogInFormValues {
     login: string;
@@ -20,16 +24,22 @@ const LogInForm: React.FC = () => {
     return (
         <div className={'LoginForm'}>
             <Form<ILogInFormValues>
-                layout={'horizontal'}
+                className={'login-form'}
                 onFinish={onFinish}
             >
-                <Form.Item valuePropName={'login'}>
-                    <Input placeholder={'Логин'} />
+                <Form.Item
+                    name={'login'}
+                    rules={emailRequiredFiled(true)}
+                >
+                    <Input className={'input'} placeholder={'Логин'} />
                 </Form.Item>
-                <Form.Item valuePropName={'password'}>
-                    <Input type={'password'} placeholder={'Пароль'} />
+                <Form.Item
+                    name={'password'}
+                    rules={confirmPasswordField}
+                >
+                    <Input className={'input'} type={'password'} placeholder={'Пароль'} />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item className={'submit-button'}>
                     <Button htmlType={'submit'}>Войти</Button>
                 </Form.Item>
             </Form>

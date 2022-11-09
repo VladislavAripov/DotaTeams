@@ -10,6 +10,8 @@ import OAuthButton from './OAuthButton';
 import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
 import './AuthorizationPage.less';
+import googleLogo from './assets/google-logo.svg';
+import steamLogo from './assets/steam-logo.svg';
 
 type AuthorizationMode = 'LogIn' | 'SignUp';
 
@@ -53,7 +55,8 @@ const AuthorizationPage: React.FC = () => {
                             или
                         </Divider>
                         <div className={'oauth-buttons-panel'}>
-                            <OAuthButton />
+                            <OAuthButton icon={googleLogo} label={'Continue with Google'} redirectUri={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'} />
+                            <OAuthButton icon={steamLogo} label={'Continue with Steam'} redirectUri={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'} />
                         </div>
                     </ContentWrapper>
                 </div>

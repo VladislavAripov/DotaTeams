@@ -1,1 +1,37 @@
 @import 'styles';
+
+@oauth-text-color: rgba(black, 0.54);
+@oauth-hover-text-color: rgba(black, 0.7);
+
+.oauth-button {
+  cursor: pointer;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 16px;
+  width: 100%;
+
+  .icon-wrapper {
+    .icon {
+      height: 28px;
+      width: 28px;
+      background-size: contain;
+    }
+  }
+
+  .label {
+    margin-left: 12px;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    height: 29px;
+    line-height: 29px;
+    color: @oauth-text-color;
+  }
+}
+
+.oauth-button:hover {
+  text-decoration: underline;
+  color: @oauth-hover-text-color
+}
