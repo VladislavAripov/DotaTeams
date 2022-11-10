@@ -52,7 +52,6 @@ export const Page: React.FC<React.PropsWithChildren<IProps>> = (props) => {
                 }
             </div>
             <div className={'footer'}>
-                <div className={'footer-gradient'} />
                 <div className={'footer-info'}>
                     <div className={'left-panel'}>
                         <div className={'command-info'}>
