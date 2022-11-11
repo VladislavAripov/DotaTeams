@@ -9,3 +9,24 @@
 @text-color: @color-text;
 @font-size-base: 16px;
 @primary-color: @color-iron-man;
+
+@table-bg: rgba(black, 0.7);
+@table-header-bg: black;
+@table-header-color: white;
+@table-row-hover-bg: black;
+@table-border-color: transparent;
+
+.ant-table {
+    tbody {
+        .ant-table-cell {
+            color: gray !important;
+            background: rgba(black(0.7)) !important;
+        }
+
+        .ant-table-cell-row-hover {
+            cursor: pointer;
+            color: white !important;
+            background: black !important;
+        }
+    }
+}

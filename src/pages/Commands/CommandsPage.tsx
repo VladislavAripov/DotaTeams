@@ -4,6 +4,7 @@ import { ColumnsType } from 'antd/es/table';
 import { Page } from 'components/Layout/Page';
 import { PageContent } from 'components/Layout/PageContent';
 import ContentWrapper from 'ui-kit/ContentWrapper';
+import './CommandsPage.less';
 
 interface ICommandItem {
     key: number;
@@ -165,15 +166,16 @@ const CommandsPage: React.FC = () => {
     return (
         <Page>
             <PageContent>
-                <ContentWrapper widthMode={'FillParent'}>
-                    Страница со списком команд
-                    <Table
-                        style={{ minHeight: 250 }}
-                        pagination={false}
-                        dataSource={data}
-                        columns={columns}
-                    />
-                </ContentWrapper>
+                <div className={'CommandsPage'}>
+                    <ContentWrapper widthMode={'FillParent'}>
+                        <Table
+                            style={{ minHeight: 250 }}
+                            pagination={false}
+                            dataSource={data}
+                            columns={columns}
+                        />
+                    </ContentWrapper>
+                </div>
             </PageContent>
         </Page>
     );
