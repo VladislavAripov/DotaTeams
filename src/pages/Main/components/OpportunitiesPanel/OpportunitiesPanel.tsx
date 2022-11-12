@@ -26,11 +26,11 @@ const OpportunitiesPanel: React.FC = () => {
                 />
                 <OpportunityItem
                     icon={calendar}
-                    label={'Будьте профи - планируйте свое игровое время'}
+                    label={'Планируйте свое игровое время'}
                 />
                 <OpportunityItem
                     icon={ai}
-                    label={'Получайте детальную статистику по своим матчам'}
+                    label={'Получайте детальную статистику матчей'}
                 />
                 <OpportunityItem
                     icon={progress}
