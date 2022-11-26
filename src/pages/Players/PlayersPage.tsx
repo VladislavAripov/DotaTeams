@@ -1,29 +1,25 @@
-import React from 'react';
-import { Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Input, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { Page } from 'components/Layout/Page';
 import { PageContent } from 'components/Layout/PageContent';
 import ContentWrapper from 'ui-kit/ContentWrapper';
 import './PlayersPage.less';
+import browserHistory from 'App/root/browserHistory';
+import { Pages } from 'constants/links';
+import { IPlayer } from 'api/types/v1.0/player';
+import { getPlayersList } from "api/v1.0/players";
+import { SearchOutlined } from "@ant-design/icons";
+import TextButton from "ui-kit/TextButton";
 
-interface IPlayerItem {
-    key: number;
-    number: number;
-    name: string;
-    region: string;
-    winsRate: number;
-    winsNumber: number;
-    loseNumber: number;
-    matchesNumber: number;
-}
-
-const columns: ColumnsType<IPlayerItem> = [
+const columns: ColumnsType<IPlayer> = [
     {
         title: '#',
         dataIndex: 'number',
         key: 'number',
         align: 'center',
         width: '5%',
+        render: (_, __, index) => index + 1,
     },
     {
         title: 'Имя игрока',
@@ -69,111 +65,50 @@ const columns: ColumnsType<IPlayerItem> = [
     },
 ];
 
-const data: IPlayerItem[] = [
-    {
-        key: 1,
-        number: 1,
-        name: 'minain',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 2,
-        number: 2,
-        name: 'looser',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 3,
-        number: 3,
-        name: 'winner',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 4,
-        number: 4,
-        name: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 5,
-        number: 5,
-        name: 'best player',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 6,
-        number: 6,
-        name: 'my bad',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 7,
-        number: 7,
-        name: 'helper',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 8,
-        number: 8,
-        name: 'ruslan',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 8,
-        number: 8,
-        name: 'the best',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-];
-
 const PlayersPage: React.FC = () => {
+    const [searchString, setSearchString] = useState<string>();
+    const [playersList, setPlayersList] = useState<IPlayer[]>(
+        getPlayersList({ searchName: searchString, skip: 0, take: 10 }).data);
+
+    useEffect(() => {
+        setPlayersList(getPlayersList({ searchName: searchString, skip: 0, take: 10 }).data);
+    }, [searchString]);
+
+    const loadMore = () => {
+        setPlayersList([...playersList, ...getPlayersList({ searchName: searchString, skip: playersList.length, take: 10 }).data]);
+    };
+
     return (
         <Page>
             <PageContent>
                 <div className={'PlayersPage'}>
                     <ContentWrapper widthMode={'FillParent'}>
+                        <div className={'search-wrapper'}>
+                            <div className={'search-label'}>Поиск</div>
+                            <Input.Search
+                                placeholder='Введите название или id команды'
+                                allowClear
+                                enterButton={<SearchOutlined />}
+                                size='large'
+                                onSearch={(value) => { setSearchString(value); }}
+                            />
+                        </div>
                         <Table
                             style={{ minHeight: 250 }}
                             pagination={false}
-                            dataSource={data}
+                            dataSource={playersList}
                             columns={columns}
+                            onRow={(_, index) => {
+                                return {
+                                    onClick: () => {
+                                        browserHistory.push(`${Pages.Players.url}/${index ?? 0}`);
+                                    },
+                                };
+                            }}
                         />
+                        <div className={'load-more-wrapper'}>
+                            <TextButton onClick={loadMore}>Загрузить еще</TextButton>
+                        </div>
                     </ContentWrapper>
                 </div>
             </PageContent>

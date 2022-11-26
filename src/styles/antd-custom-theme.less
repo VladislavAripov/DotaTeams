@@ -30,3 +30,41 @@
         }
     }
 }
+
+.ant-list {
+    .ant-list-item {
+        color: @color-control !important;
+        background: rgba(black(0.7)) !important;
+    }
+
+    .ant-list-item:hover {
+        color: @color-text !important;
+        background: @color-iron-man !important;
+    }
+}
+
+@tabs-card-head-background: transparent;
+@tabs-ink-bar-color: @color-control-selected;
+@tabs-highlight-color: @color-control-selected;
+@tabs-hover-color: @tabs-highlight-color;
+@tabs-active-color: @tabs-highlight-color;
+
+.ant-tabs {
+    .ant-tabs-nav {
+        .ant-tabs-tab {
+            color: @color-control;
+        }
+
+        .ant-tabs-tab:hover {
+            color: @color-control-selected;
+        }
+
+        .ant-tabs-tab-active {
+            color: @color-control-selected;
+        }
+    }
+
+    .ant-tabs-nav::before {
+        border-bottom: none;
+    }
+}

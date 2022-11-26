@@ -1,29 +1,23 @@
-import React from 'react';
-import { Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Table, Input } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { SearchOutlined } from '@ant-design/icons';
 import { Page } from 'components/Layout/Page';
 import { PageContent } from 'components/Layout/PageContent';
 import ContentWrapper from 'ui-kit/ContentWrapper';
 import './CommandsPage.less';
+import { ICommand } from 'api/types/v1.0/command';
+import { getCommandsList } from 'api/v1.0/commands';
+import TextButton from 'ui-kit/TextButton';
 
-interface ICommandItem {
-    key: number;
-    number: number;
-    title: string;
-    region: string;
-    winsRate: number;
-    winsNumber: number;
-    loseNumber: number;
-    matchesNumber: number;
-}
-
-const columns: ColumnsType<ICommandItem> = [
+const columns: ColumnsType<ICommand> = [
     {
         title: '#',
         dataIndex: 'number',
         key: 'number',
         align: 'center',
         width: '5%',
+        render: (_, __, index) => index + 1,
     },
     {
         title: 'Название команды',
@@ -48,132 +42,64 @@ const columns: ColumnsType<ICommandItem> = [
     },
     {
         title: 'Побед',
-        dataIndex: 'winsNumber',
-        key: 'winsNumber',
+        dataIndex: 'winsMatchesCount',
+        key: 'winsCount',
         align: 'center',
         width: '12%',
     },
     {
         title: 'Поражений',
-        dataIndex: 'loseNumber',
-        key: 'loseNumber',
+        dataIndex: 'loseMatchesCount',
+        key: 'loseCount',
         align: 'center',
         width: '12%',
     },
     {
         title: 'Всего',
-        dataIndex: 'matchesNumber',
-        key: 'matchesNumber',
+        dataIndex: 'totalMatchesCount',
+        key: 'matchesCount',
         align: 'center',
         width: '12%',
     },
 ];
 
-const data: ICommandItem[] = [
-    {
-        key: 1,
-        number: 1,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 2,
-        number: 2,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 3,
-        number: 3,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 4,
-        number: 4,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 5,
-        number: 5,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 6,
-        number: 6,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 7,
-        number: 7,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 8,
-        number: 8,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-    {
-        key: 8,
-        number: 8,
-        title: 'minain comand',
-        region: 'RU',
-        winsRate: 94,
-        winsNumber: 12,
-        loseNumber: 1,
-        matchesNumber: 13,
-    },
-];
-
 const CommandsPage: React.FC = () => {
+    const [searchString, setSearchString] = useState<string>();
+    const [commandsList, setCommandsList] = useState<ICommand[]>(
+        getCommandsList({ searchName: searchString, skip: 0, take: 10 }).data);
+
+    useEffect(() => {
+        setCommandsList(getCommandsList({ searchName: searchString, skip: 0, take: 10 }).data);
+    }, [searchString]);
+
+    const loadMore = () => {
+        setCommandsList([...commandsList, ...getCommandsList({ searchName: searchString, skip: commandsList.length, take: 10 }).data]);
+    };
+
     return (
         <Page>
             <PageContent>
                 <div className={'CommandsPage'}>
                     <ContentWrapper widthMode={'FillParent'}>
+                        <div className={'search-wrapper'}>
+                            <div className={'search-label'}>Поиск</div>
+                            <Input.Search
+                                placeholder='Введите название или id команды'
+                                allowClear
+                                enterButton={<SearchOutlined />}
+                                size='large'
+                                onSearch={(value) => { setSearchString(value); }}
+                            />
+                        </div>
                         <Table
                             style={{ minHeight: 250 }}
                             pagination={false}
-                            dataSource={data}
+                            dataSource={commandsList}
                             columns={columns}
                         />
+                        <div className={'load-more-wrapper'}>
+                            <TextButton onClick={loadMore}>Загрузить еще</TextButton>
+                        </div>
                     </ContentWrapper>
                 </div>
             </PageContent>
