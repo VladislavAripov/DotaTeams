@@ -73,7 +73,10 @@ const CommandsPage: React.FC = () => {
     }, [searchString]);
 
     const loadMore = () => {
-        setCommandsList([...commandsList, ...getCommandsList({ searchName: searchString, skip: commandsList.length, take: 10 }).data]);
+        setCommandsList([
+            ...commandsList,
+            ...getCommandsList({ searchName: searchString, skip: commandsList.length, take: 10 }).data,
+        ]);
     };
 
     return (

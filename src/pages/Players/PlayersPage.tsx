@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { SearchOutlined } from '@ant-design/icons';
 import { Page } from 'components/Layout/Page';
 import { PageContent } from 'components/Layout/PageContent';
 import ContentWrapper from 'ui-kit/ContentWrapper';
@@ -8,9 +9,8 @@ import './PlayersPage.less';
 import browserHistory from 'App/root/browserHistory';
 import { Pages } from 'constants/links';
 import { IPlayer } from 'api/types/v1.0/player';
-import { getPlayersList } from "api/v1.0/players";
-import { SearchOutlined } from "@ant-design/icons";
-import TextButton from "ui-kit/TextButton";
+import { getPlayersList } from 'api/v1.0/players';
+import TextButton from 'ui-kit/TextButton';
 
 const columns: ColumnsType<IPlayer> = [
     {
@@ -75,7 +75,10 @@ const PlayersPage: React.FC = () => {
     }, [searchString]);
 
     const loadMore = () => {
-        setPlayersList([...playersList, ...getPlayersList({ searchName: searchString, skip: playersList.length, take: 10 }).data]);
+        setPlayersList([
+            ...playersList,
+            ...getPlayersList({ searchName: searchString, skip: playersList.length, take: 10 }).data,
+        ]);
     };
 
     return (
