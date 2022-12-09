@@ -2,19 +2,10 @@ import React from 'react';
 import { List } from 'antd';
 import InfoBlock from '../InfoBlock';
 import './GeneralTab.less';
-
-interface IHeroRowInfo {
-    icon: string;
-    name: string;
-    matchesNumber: number;
-    winsNumber: number;
-    loseNumber: number;
-    winsRate: number;
-    kda: number;
-}
+import { PlayerHeroInfo } from 'api/types/v1.0/playerProfile';
 
 interface IGeneralPlayerInfo {
-    popularHeroes: IHeroRowInfo[];
+    popularHeroes: PlayerHeroInfo[];
 }
 
 export interface IProps {
@@ -25,40 +16,40 @@ const GeneralTab: React.FC<IProps> = () => {
     const data: IGeneralPlayerInfo = {
         popularHeroes: [
             {
-                icon: 'https://dota2.ru/img/heroes/shadow_fiend/portrait.jpg',
+                preview: 'https://dota2.ru/img/heroes/shadow_fiend/portrait.jpg',
                 name: 'Shadow Fiend',
-                matchesNumber: 500,
-                winsNumber: 345,
-                loseNumber: 256,
+                totalMatchesCount: 500,
+                winsMatchesCount: 345,
+                loseMatchesCount: 256,
                 winsRate: 65,
                 kda: 5,
             },
             {
-                icon: 'https://dota2.ru/img/heroes/anti_mage/portrait.jpg',
+                preview: 'https://dota2.ru/img/heroes/anti_mage/portrait.jpg',
                 name: 'Anti-Mage',
-                matchesNumber: 500,
-                winsNumber: 345,
-                loseNumber: 256,
+                totalMatchesCount: 500,
+                winsMatchesCount: 345,
+                loseMatchesCount: 256,
                 winsRate: 65,
                 kda: 5,
             },
             {
-                icon: 'https://dota2.ru/img/heroes/invoker/portrait.jpg',
+                preview: 'https://dota2.ru/img/heroes/invoker/portrait.jpg',
                 name: 'Invoker',
-                matchesNumber: 500,
-                winsNumber: 345,
-                loseNumber: 256,
+                totalMatchesCount: 500,
+                winsMatchesCount: 345,
+                loseMatchesCount: 256,
                 winsRate: 65,
                 kda: 5,
             },
         ],
     };
 
-    const renderHeroRow = (item: IHeroRowInfo, index: number) => {
+    const renderHeroRow = (item: PlayerHeroInfo, index: number) => {
         return (
             <div className={'hero-row'} key={index}>
                 <div className={'icon'}>
-                    <img src={item.icon} alt={''} />
+                    <img src={item.preview} alt={''} />
                 </div>
                 <div className={'hero-name'}>
                     {item.name}
@@ -68,7 +59,7 @@ const GeneralTab: React.FC<IProps> = () => {
                         Количество матчей
                     </div>
                     <div className={'value'}>
-                        {item.matchesNumber}
+                        {item.totalMatchesCount}
                     </div>
                 </div>
                 <div className={'wins field-with-label'}>
@@ -76,7 +67,7 @@ const GeneralTab: React.FC<IProps> = () => {
                         Победы
                     </div>
                     <div className={'value'}>
-                        {item.winsNumber}
+                        {item.winsMatchesCount}
                     </div>
                 </div>
                 <div className={'lose field-with-label'}>
@@ -84,7 +75,7 @@ const GeneralTab: React.FC<IProps> = () => {
                         Поражения
                     </div>
                     <div className={'value'}>
-                        {item.loseNumber}
+                        {item.loseMatchesCount}
                     </div>
                 </div>
                 <div className={'wins-rate field-with-label'}>
@@ -110,7 +101,7 @@ const GeneralTab: React.FC<IProps> = () => {
     return (
         <div className={'GeneralTab'}>
             <InfoBlock label={'Самые популярные герои'}>
-                <List<IHeroRowInfo>
+                <List<PlayerHeroInfo>
                     renderItem={renderHeroRow}
                     dataSource={data.popularHeroes}
                     split={false}
