@@ -92,6 +92,7 @@ const CommandsPage: React.FC = () => {
                                 enterButton={<SearchOutlined />}
                                 size='large'
                                 onSearch={(value) => { setSearchString(value); }}
+                                onChange={(value) => { setSearchString(value.target.value); }}
                             />
                         </div>
                         <Table
