@@ -142,12 +142,10 @@ export const getPlayersList = ({ searchName, ...pagination }: IPlayersListReques
         playersList
             .filter((command) =>
                 command.name.toLowerCase().includes(searchName.toLowerCase()))
-            .slice(pagination.skip, pagination.skip + pagination.take)
-        : playersList
-            .slice(pagination.skip, pagination.skip + pagination.take);
+        : playersList;
 
     return {
-        data: filteredPlayersList,
-        totalCount: playersList.length,
+        data: filteredPlayersList.slice(pagination.skip, pagination.skip + pagination.take),
+        totalCount: filteredPlayersList.length,
     };
 };

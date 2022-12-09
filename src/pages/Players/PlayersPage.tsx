@@ -8,7 +8,7 @@ import ContentWrapper from 'ui-kit/ContentWrapper';
 import './PlayersPage.less';
 import browserHistory from 'App/root/browserHistory';
 import { Pages } from 'constants/links';
-import { IPlayer } from 'api/types/v1.0/player';
+import { IPlayer, IPlayersListResponse } from 'api/types/v1.0/player';
 import { getPlayersList } from 'api/v1.0/players';
 import TextButton from 'ui-kit/TextButton';
 
@@ -44,22 +44,22 @@ const columns: ColumnsType<IPlayer> = [
     },
     {
         title: 'Побед',
-        dataIndex: 'winsNumber',
-        key: 'winsNumber',
+        dataIndex: 'winsMatchesCount',
+        key: 'winsMatchesCount',
         align: 'center',
         width: '12%',
     },
     {
         title: 'Поражений',
-        dataIndex: 'loseNumber',
-        key: 'loseNumber',
+        dataIndex: 'loseMatchesCount',
+        key: 'loseMatchesCount',
         align: 'center',
         width: '12%',
     },
     {
         title: 'Всего',
-        dataIndex: 'matchesNumber',
-        key: 'matchesNumber',
+        dataIndex: 'totalMatchesCount',
+        key: 'totalMatchesCount',
         align: 'center',
         width: '12%',
     },
@@ -67,18 +67,35 @@ const columns: ColumnsType<IPlayer> = [
 
 const PlayersPage: React.FC = () => {
     const [searchString, setSearchString] = useState<string>();
-    const [playersList, setPlayersList] = useState<IPlayer[]>(
-        getPlayersList({ searchName: searchString, skip: 0, take: 10 }).data);
+    const [playersList, setPlayersList] = useState<IPlayersListResponse>(
+        getPlayersList({
+            searchName: searchString,
+            skip: 0,
+            take: 10,
+        })
+    );
 
     useEffect(() => {
-        setPlayersList(getPlayersList({ searchName: searchString, skip: 0, take: 10 }).data);
+        setPlayersList(getPlayersList({
+            searchName: searchString,
+            skip: 0,
+            take: 10,
+        }));
     }, [searchString]);
 
     const loadMore = () => {
-        setPlayersList([
-            ...playersList,
-            ...getPlayersList({ searchName: searchString, skip: playersList.length, take: 10 }).data,
-        ]);
+        const morePlayersList = getPlayersList({
+            searchName: searchString,
+            skip: playersList.data.length,
+            take: 10,
+        });
+        setPlayersList({
+            data: [
+                ...playersList.data,
+                ...morePlayersList.data,
+            ],
+            totalCount: morePlayersList.totalCount,
+        });
     };
 
     return (
@@ -92,6 +109,7 @@ const PlayersPage: React.FC = () => {
                                 placeholder='Введите название или id команды'
                                 allowClear
                                 enterButton={<SearchOutlined />}
+                                style={{ width: '40%' }}
                                 size='large'
                                 onSearch={(value) => { setSearchString(value); }}
                                 onChange={(value) => { setSearchString(value.target.value); }}
@@ -100,7 +118,7 @@ const PlayersPage: React.FC = () => {
                         <Table
                             style={{ minHeight: 250 }}
                             pagination={false}
-                            dataSource={playersList}
+                            dataSource={playersList.data}
                             columns={columns}
                             onRow={(_, index) => {
                                 return {
@@ -110,9 +128,12 @@ const PlayersPage: React.FC = () => {
                                 };
                             }}
                         />
-                        <div className={'load-more-wrapper'}>
-                            <TextButton onClick={loadMore}>Загрузить еще</TextButton>
-                        </div>
+                        {
+                            playersList.data.length < playersList.totalCount
+                            && <div className={'load-more-wrapper'}>
+                                <TextButton onClick={loadMore}>Загрузить еще</TextButton>
+                            </div>
+                        }
                     </ContentWrapper>
                 </div>
             </PageContent>

@@ -142,12 +142,10 @@ export const getCommandsList = ({ searchName, ...pagination }: ICommandsListRequ
         commandsList
             .filter((command) =>
                 command.title.toLowerCase().includes(searchName.toLowerCase()))
-            .slice(pagination.skip, pagination.skip + pagination.take)
-        : commandsList
-            .slice(pagination.skip, pagination.skip + pagination.take);
+        : commandsList;
 
     return {
-        data: filteredCommandsList,
-        totalCount: commandsList.length,
+        data: filteredCommandsList.slice(pagination.skip, pagination.skip + pagination.take),
+        totalCount: filteredCommandsList.length,
     };
 };

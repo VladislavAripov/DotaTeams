@@ -6,7 +6,7 @@ import { Page } from 'components/Layout/Page';
 import { PageContent } from 'components/Layout/PageContent';
 import ContentWrapper from 'ui-kit/ContentWrapper';
 import './CommandsPage.less';
-import { ICommand } from 'api/types/v1.0/command';
+import { ICommand, ICommandsListResponse } from 'api/types/v1.0/command';
 import { getCommandsList } from 'api/v1.0/commands';
 import TextButton from 'ui-kit/TextButton';
 
@@ -65,18 +65,35 @@ const columns: ColumnsType<ICommand> = [
 
 const CommandsPage: React.FC = () => {
     const [searchString, setSearchString] = useState<string>();
-    const [commandsList, setCommandsList] = useState<ICommand[]>(
-        getCommandsList({ searchName: searchString, skip: 0, take: 10 }).data);
+    const [commandsList, setCommandsList] = useState<ICommandsListResponse>(
+        getCommandsList({
+            searchName: searchString,
+            skip: 0,
+            take: 10,
+        })
+    );
 
     useEffect(() => {
-        setCommandsList(getCommandsList({ searchName: searchString, skip: 0, take: 10 }).data);
+        setCommandsList(getCommandsList({
+            searchName: searchString,
+            skip: 0,
+            take: 10,
+        }));
     }, [searchString]);
 
     const loadMore = () => {
-        setCommandsList([
-            ...commandsList,
-            ...getCommandsList({ searchName: searchString, skip: commandsList.length, take: 10 }).data,
-        ]);
+        const moreCommandsList = getCommandsList({
+            searchName: searchString,
+            skip: commandsList.data.length,
+            take: 10
+        });
+        setCommandsList({
+            data: [
+                ...commandsList.data,
+                ...moreCommandsList.data,
+            ],
+            totalCount: moreCommandsList.totalCount
+        });
     };
 
     return (
@@ -89,21 +106,29 @@ const CommandsPage: React.FC = () => {
                             <Input.Search
                                 placeholder='Введите название или id команды'
                                 allowClear
-                                enterButton={<SearchOutlined />}
+                                enterButton={<SearchOutlined/>}
                                 size='large'
-                                onSearch={(value) => { setSearchString(value); }}
-                                onChange={(value) => { setSearchString(value.target.value); }}
+                                style={{ width: '40%' }}
+                                onSearch={(value) => {
+                                    setSearchString(value);
+                                }}
+                                onChange={(value) => {
+                                    setSearchString(value.target.value);
+                                }}
                             />
                         </div>
                         <Table
                             style={{ minHeight: 250 }}
                             pagination={false}
-                            dataSource={commandsList}
+                            dataSource={commandsList.data}
                             columns={columns}
                         />
-                        <div className={'load-more-wrapper'}>
-                            <TextButton onClick={loadMore}>Загрузить еще</TextButton>
-                        </div>
+                        {
+                            commandsList.data.length < commandsList.totalCount &&
+                            <div className={'load-more-wrapper'}>
+                                <TextButton onClick={loadMore}>Загрузить еще</TextButton>
+                            </div>
+                        }
                     </ContentWrapper>
                 </div>
             </PageContent>
