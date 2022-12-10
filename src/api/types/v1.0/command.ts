@@ -1,3 +1,5 @@
+import {IPlayer} from "./player";
+
 export interface ICommandsListRequest {
     searchName?: string;
     skip: number;
@@ -6,13 +8,14 @@ export interface ICommandsListRequest {
 
 export interface ICommand {
     id: number;
-    preview: string;
+    avatar: string;
     title: string;
     region: string;
     winsRate: number;
     winsMatchesCount: number;
     loseMatchesCount: number;
     totalMatchesCount: number;
+    playersList?: IPlayer[];
 }
 
 export interface ICommandsListResponse {

@@ -6,6 +6,7 @@ export interface IPlayersListRequest {
 
 export interface IPlayer {
     id: number;
+    avatar: string;
     name: string;
     region: string;
     winsRate: number;

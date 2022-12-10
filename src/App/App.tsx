@@ -9,6 +9,7 @@ import PlayersPage from 'pages/Players';
 import TournamentsPage from 'pages/Tournaments';
 import ProfilePage from 'pages/Profile';
 import MainPage from 'pages/Main';
+import CommandProfilePage from 'pages/CommandProfile';
 import { Pages } from 'constants/links';
 import './App.less';
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
             <ViewportHeightProvider>
                 <Switch>
                     <Route path={Pages.Authorization.url} component={AuthorizationPage} />
+                    <Route path={`${Pages.Commands.url}/:commandId`} component={CommandProfilePage} />
                     <Route path={Pages.Commands.url} component={CommandsPage} />
                     <Route path={`${Pages.Players.url}/:playerId`} component={PlayerProfilePage} />
                     <Route path={Pages.Players.url} component={PlayersPage} />

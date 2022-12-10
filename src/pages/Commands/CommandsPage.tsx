@@ -9,6 +9,8 @@ import './CommandsPage.less';
 import { ICommand, ICommandsListResponse } from 'api/types/v1.0/command';
 import { getCommandsList } from 'api/v1.0/commands';
 import TextButton from 'ui-kit/TextButton';
+import browserHistory from 'App/root/browserHistory';
+import { Pages } from 'constants/links';
 
 const columns: ColumnsType<ICommand> = [
     {
@@ -85,14 +87,14 @@ const CommandsPage: React.FC = () => {
         const moreCommandsList = getCommandsList({
             searchName: searchString,
             skip: commandsList.data.length,
-            take: 10
+            take: 10,
         });
         setCommandsList({
             data: [
                 ...commandsList.data,
                 ...moreCommandsList.data,
             ],
-            totalCount: moreCommandsList.totalCount
+            totalCount: moreCommandsList.totalCount,
         });
     };
 
@@ -106,7 +108,7 @@ const CommandsPage: React.FC = () => {
                             <Input.Search
                                 placeholder='Введите название или id команды'
                                 allowClear
-                                enterButton={<SearchOutlined/>}
+                                enterButton={<SearchOutlined />}
                                 size='large'
                                 style={{ width: '40%' }}
                                 onSearch={(value) => {
@@ -122,6 +124,13 @@ const CommandsPage: React.FC = () => {
                             pagination={false}
                             dataSource={commandsList.data}
                             columns={columns}
+                            onRow={(item, _) => {
+                                return {
+                                    onClick: () => {
+                                        browserHistory.push(`${Pages.Commands.url}/${item.id}`);
+                                    },
+                                };
+                            }}
                         />
                         {
                             commandsList.data.length < commandsList.totalCount &&

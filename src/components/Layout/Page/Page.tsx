@@ -38,13 +38,6 @@ export const Page: React.FC<React.PropsWithChildren<IProps>> = (props) => {
                     >
                         Игроки
                     </TextButton>
-                    <TextButton
-                        className={'nav-item'}
-                        active={isCurrentPage(Pages.Tournaments.url)}
-                        onClick={() => browserHistory.push(Pages.Tournaments.url)}
-                    >
-                        Турниры
-                    </TextButton>
                     <div className={'divider'} />
                     <TextButton
                         className={'nav-item'}

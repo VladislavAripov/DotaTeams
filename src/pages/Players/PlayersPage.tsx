@@ -120,10 +120,10 @@ const PlayersPage: React.FC = () => {
                             pagination={false}
                             dataSource={playersList.data}
                             columns={columns}
-                            onRow={(_, index) => {
+                            onRow={(item, _) => {
                                 return {
                                     onClick: () => {
-                                        browserHistory.push(`${Pages.Players.url}/${index ?? 0}`);
+                                        browserHistory.push(`${Pages.Players.url}/${item.id}`);
                                     },
                                 };
                             }}
