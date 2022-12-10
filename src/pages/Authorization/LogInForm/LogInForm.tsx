@@ -9,6 +9,7 @@ import {
     confirmPasswordField,
     emailRequiredFiled,
 } from 'utils/antdValidationRules';
+import { redirect } from 'utils/browser';
 
 interface ILogInFormValues {
     login: string;
@@ -16,9 +17,8 @@ interface ILogInFormValues {
 }
 
 const LogInForm: React.FC = () => {
-    const onFinish = (values: ILogInFormValues) => {
-        // eslint-disable-next-line
-        console.log(JSON.stringify(values));
+    const onFinish = (_: ILogInFormValues) => {
+        redirect('/');
     };
 
     return (

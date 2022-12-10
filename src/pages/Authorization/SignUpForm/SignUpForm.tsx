@@ -11,6 +11,7 @@ import {
     requiredField,
     setPasswordField,
 } from 'utils/antdValidationRules';
+import { redirect } from 'utils/browser';
 
 interface ISignUpFormValues {
     email: string;
@@ -18,9 +19,8 @@ interface ISignUpFormValues {
 }
 
 const SignUpForm: React.FC = () => {
-    const onFinish = (values: ISignUpFormValues) => {
-        // eslint-disable-next-line
-        console.log(JSON.stringify(values));
+    const onFinish = (_: ISignUpFormValues) => {
+        redirect('/');
     };
 
     return (
