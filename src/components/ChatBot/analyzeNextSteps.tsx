@@ -2,7 +2,7 @@ export const analyzeNextSteps = (step: number, userResponse: string) => {
     return step === 0
         ? {
             purpose: "Вступление",
-            message: `Nice to meet you, ${userResponse}! It feels like I know you already. We have some job positions for you. Which of these call out to you?`,
+            message: `Рады тебя видеть, ${userResponse}! Этот чат поможет тебе познакомиться с проектом. Если у тебя есть вопросы, давай пройе`,
             options: ["Frontend", "Backend", "Full Stack"]
         }
         : step === 1

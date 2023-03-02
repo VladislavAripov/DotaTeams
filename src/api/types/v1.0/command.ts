@@ -1,4 +1,4 @@
-import {IPlayer} from "./player";
+import { IPlayer } from "./player";
 
 export interface ICommandsListRequest {
     searchName?: string;

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import './Page.less';
 import { Link } from 'react-router-dom';
 import browserHistory from 'App/root/browserHistory';
 import { Pages } from 'constants/links';
 import TextButton from 'ui-kit/TextButton';
 import { redirect } from 'utils/browser';
-import ChatBot from "components/ChatBot/ChatBot";
-import { Button } from "antd";
-import { RobotOutlined } from "@ant-design/icons";
 
 export interface IProps {
     solidBackground?: boolean;
@@ -15,8 +12,6 @@ export interface IProps {
 
 export const Page: React.FC<React.PropsWithChildren<IProps>> = (props) => {
     const isCurrentPage = (path: string) => window.location.pathname === path;
-    const [chatBotISOpened, setChatBotIsOpened] = useState<boolean>(false);
-
     return (
         <div className={`page ${props.solidBackground ? 'solid-background' : ''}`}>
             <div className={'header'}>
@@ -57,25 +52,7 @@ export const Page: React.FC<React.PropsWithChildren<IProps>> = (props) => {
                     props.children
                 }
             </div>
-            {
-                chatBotISOpened
-                && <div className={'chat-bot-wrapper'}>
-                    <ChatBot />
-                </div>
-            }
-            <div className={'chat-bot-button-wrapper'}>
-                <Button
-                    type={'primary'}
-                    shape={'circle'}
-                    size={'large'}
-                    icon={<RobotOutlined />}
-                    onClick={
-                        () => {
-                            setChatBotIsOpened(!chatBotISOpened);
-                        }
-                    }
-                />
-            </div>
+
             <div className={'footer'}>
                 <div className={'footer-info'}>
                     <div className={'left-panel'}>
